@@ -21,6 +21,12 @@ function updateButtonState() {
 }
 
 plusRowButton.addEventListener('click', () => {
+  const numberOfRows = tableElement.querySelectorAll('tr').length;
+
+  if (numberOfRows >= MAX_LIMIT) {
+    return;
+  }
+
   const firstRow = tableElement.querySelector('tr');
   const numberOfCells = firstRow ? firstRow.children.length : 1;
   const newRow = document.createElement('tr');
@@ -33,11 +39,6 @@ plusRowButton.addEventListener('click', () => {
 
   tableElement.appendChild(newRow);
   updateButtonState();
-
-  const numberOfRows = tableElement.querySelectorAll('tr').length;
-
-  if (numberOfRows >= MAX_LIMIT) {
-  }
 });
 
 plusColumnButton.addEventListener('click', () => {
@@ -73,16 +74,9 @@ removeColumnButton.addEventListener('click', () => {
 
   if (firstRow && firstRow.children.length > MIN_LIMIT) {
     rows.forEach((row) => {
-      if (row.lastChild) {
-        row.lastChild.remove(); // Удаляем последний элемент
-      }
+      row.lastChild.remove();
     });
-
-    // Принудительно пересчитываем DOM
-    const updatedColumns = firstRow.children.length;
-
-
-    updateButtonState(); // Обновляем кнопки после удаления
+    updateButtonState();
   }
 });
 
