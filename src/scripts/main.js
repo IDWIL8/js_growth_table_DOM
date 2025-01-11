@@ -73,8 +73,9 @@ removeColumnButton.addEventListener('click', () => {
   const firstRow = tableElement.querySelector('tr');
 
   if (firstRow && firstRow.children.length > MIN_LIMIT) {
+    // console.log(`clicked`);
     rows.forEach((row) => {
-      row.lastChild.remove();
+      row.lastElementChild.remove();
     });
     updateButtonState();
   }
